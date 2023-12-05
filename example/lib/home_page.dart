@@ -156,7 +156,7 @@ class HomePageState extends State<HomePage> {
           missedCallNotificationChannelName: 'Missed Call',
         ),
         ios: const IOSParams(
-          iconName: 'CallKitLogo',
+          // iconName: 'CallKitLogo',
           handleType: '',
           supportsVideo: true,
           maximumCallGroups: 2,

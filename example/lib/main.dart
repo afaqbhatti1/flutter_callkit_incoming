@@ -42,7 +42,7 @@ Future<void> showCallkitIncoming(String uuid) async {
       actionColor: '#4CAF50',
     ),
     ios: const IOSParams(
-      iconName: 'CallKitLogo',
+      // iconName: 'CallKitLogo',
       handleType: '',
       supportsVideo: true,
       maximumCallGroups: 2,
