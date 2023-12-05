@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:flutter/services.dart';
 
@@ -12,10 +13,8 @@ import 'entities/entities.dart';
 /// * callConnected(dynamic)
 
 class FlutterCallkitIncoming {
-  static const MethodChannel _channel =
-      MethodChannel('flutter_callkit_incoming');
-  static const EventChannel _eventChannel =
-      EventChannel('flutter_callkit_incoming_events');
+  static const MethodChannel _channel = MethodChannel('flutter_callkit_incoming');
+  static const EventChannel _eventChannel = EventChannel('flutter_callkit_incoming_events');
 
   /// Listen to event callback from [FlutterCallkitIncoming].
   ///
@@ -34,18 +33,20 @@ class FlutterCallkitIncoming {
   /// Event.ACTION_CALL_TOGGLE_AUDIO_SESSION - only iOS
   /// Event.DID_UPDATE_DEVICE_PUSH_TOKEN_VOIP - only iOS
   /// }
-  static Stream<CallEvent?> get onEvent =>
-      _eventChannel.receiveBroadcastStream().map(_receiveCallEvent);
+  static Stream<CallEvent?> get onEvent => _eventChannel.receiveBroadcastStream().map(_receiveCallEvent);
 
   /// Show Callkit Incoming.
   /// On iOS, using Callkit. On Android, using a custom UI.
   static Future showCallkitIncoming(CallKitParams params) async {
+    log("<<<<<<<<<<<<<<<<<showCallkitIncoming>>>>>>>>>>>>>>>>>>>>");
     await _channel.invokeMethod("showCallkitIncoming", params.toJson());
   }
 
   /// Show Miss Call Notification.
   /// Only Android
   static Future showMissCallNotification(CallKitParams params) async {
+    log("<<<<<<<<<<<<<<<<<showMissCallNotification>>>>>>>>>>>>>>>>>>>>");
+
     await _channel.invokeMethod("showMissCallNotification", params.toJson());
   }
 
@@ -53,6 +54,8 @@ class FlutterCallkitIncoming {
   /// On iOS, using Callkit(create a history into the Phone app).
   /// On Android, Nothing(only callback event listener).
   static Future startCall(CallKitParams params) async {
+    log("<<<<<<<<<<<<<<<<<startCall>>>>>>>>>>>>>>>>>>>>");
+
     await _channel.invokeMethod("startCall", params.toJson());
   }
 
@@ -60,6 +63,8 @@ class FlutterCallkitIncoming {
   /// On iOS, using Callkit(update the ongoing call ui).
   /// On Android, Nothing(only callback event listener).
   static Future muteCall(String id, {bool isMuted = true}) async {
+    log("<<<<<<<<<<<<<<<<<muteCall>>>>>>>>>>>>>>>>>>>>");
+
     await _channel.invokeMethod("muteCall", {'id': id, 'isMuted': isMuted});
   }
 
@@ -67,14 +72,17 @@ class FlutterCallkitIncoming {
   /// On iOS, using Callkit(update call ui).
   /// On Android, Nothing(only callback event listener).
   static Future<bool> isMuted(String id) async {
-    return (await _channel.invokeMethod("isMuted", {'id': id})) as bool? ??
-        false;
+    log("<<<<<<<<<<<<<<<<<isMuted>>>>>>>>>>>>>>>>>>>>");
+
+    return (await _channel.invokeMethod("isMuted", {'id': id})) as bool? ?? false;
   }
 
   /// Hold an Ongoing call.
   /// On iOS, using Callkit(update the ongoing call ui).
   /// On Android, Nothing(only callback event listener).
   static Future holdCall(String id, {bool isOnHold = true}) async {
+    log("<<<<<<<<<<<<<<<<<holdCall>>>>>>>>>>>>>>>>>>>>");
+
     await _channel.invokeMethod("holdCall", {'id': id, 'isOnHold': isOnHold});
   }
 
@@ -82,6 +90,8 @@ class FlutterCallkitIncoming {
   /// On iOS, using Callkit(update a history into the Phone app).
   /// On Android, Nothing(only callback event listener).
   static Future endCall(String id) async {
+    log("<<<<<<<<<<<<<<<<<endCall>>>>>>>>>>>>>>>>>>>>");
+
     await _channel.invokeMethod("endCall", {'id': id});
   }
 
@@ -89,11 +99,15 @@ class FlutterCallkitIncoming {
   /// On iOS, using Callkit(update a history into the Phone app).
   /// On Android, Nothing(only callback event listener).
   static Future setCallConnected(String id) async {
+    log("<<<<<<<<<<<<<<<<<setCallConnected>>>>>>>>>>>>>>>>>>>>");
+
     await _channel.invokeMethod("callConnected", {'id': id});
   }
 
   /// End all calls.
   static Future endAllCalls() async {
+    log("<<<<<<<<<<<<<<<<<endAllCalls>>>>>>>>>>>>>>>>>>>>");
+
     await _channel.invokeMethod("endAllCalls");
   }
 
@@ -101,6 +115,8 @@ class FlutterCallkitIncoming {
   /// On iOS: return active calls from Callkit.
   /// On Android: only return last call
   static Future<dynamic> activeCalls() async {
+    log("<<<<<<<<<<<<<<<<<activeCalls>>>>>>>>>>>>>>>>>>>>");
+
     return await _channel.invokeMethod("activeCalls");
   }
 
@@ -108,16 +124,22 @@ class FlutterCallkitIncoming {
   /// On iOS: return deviceToken for VoIP.
   /// On Android: return Empty
   static Future getDevicePushTokenVoIP() async {
+    log("<<<<<<<<<<<<<<<<<getDevicePushTokenVoIP>>>>>>>>>>>>>>>>>>>>");
+
     return await _channel.invokeMethod("getDevicePushTokenVoIP");
   }
 
   /// Request permisstion show notification for Android(13)
   /// Only Android: show request permission post notification for Android 13+
   static Future requestNotificationPermission(dynamic data) async {
+    log("<<<<<<<<<<<<<<<<<requestNotificationPermission>>>>>>>>>>>>>>>>>>>>");
+
     return await _channel.invokeMethod("requestNotificationPermission", data);
   }
 
   static CallEvent? _receiveCallEvent(dynamic data) {
+    log("<<<<<<<<<<<<<<<<<_receiveCallEvent>>>>>>>>>>>>>>>>>>>>");
+
     Event? event;
     Map<String, dynamic> body = {};
 
