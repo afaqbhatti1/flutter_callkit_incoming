@@ -137,7 +137,6 @@ public class Call: NSObject {
     @objc public var extra: NSDictionary
     
     //iOS
-    // @objc public var iconName: String
     @objc public var handleType: String
     @objc public var supportsVideo: Bool
     @objc public var maximumCallGroups: Int
@@ -163,7 +162,6 @@ public class Call: NSObject {
         self.type = type
         self.duration = 30000
         self.extra = [:]
-        // self.iconName = "CallKitLogo"
         self.handleType = ""
         self.supportsVideo = true
         self.maximumCallGroups = 2
@@ -201,7 +199,6 @@ public class Call: NSObject {
         
         
         if let ios = args["ios"] as? [String: Any] {
-            // self.iconName = ios["iconName"] as? String ?? "CallKitLogo"
             self.handleType = ios["handleType"] as? String ?? ""
             self.supportsVideo = ios["supportsVideo"] as? Bool ?? true
             self.maximumCallGroups = ios["maximumCallGroups"] as? Int ?? 2
@@ -218,7 +215,6 @@ public class Call: NSObject {
             self.audioSessionPreferredSampleRate = ios["audioSessionPreferredSampleRate"] as? Double ?? 44100.0
             self.audioSessionPreferredIOBufferDuration = ios["audioSessionPreferredIOBufferDuration"] as? Double ?? 0.005
         }else {
-            // self.iconName = args["iconName"] as? String ?? "CallKitLogo"
             self.handleType = args["handleType"] as? String ?? ""
             self.supportsVideo = args["supportsVideo"] as? Bool ?? true
             self.maximumCallGroups = args["maximumCallGroups"] as? Int ?? 2
@@ -239,7 +235,6 @@ public class Call: NSObject {
     
     public func toJSON() -> [String: Any] {
         let ios: [String : Any] = [
-            // "iconName": iconName,
             "handleType": handleType,
             "supportsVideo": supportsVideo,
             "maximumCallGroups": maximumCallGroups,

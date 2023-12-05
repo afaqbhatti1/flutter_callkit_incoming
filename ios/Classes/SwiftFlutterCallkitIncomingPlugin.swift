@@ -377,13 +377,6 @@ public class SwiftFlutterCallkitIncomingPlugin: NSObject, FlutterPlugin, CXProvi
         if #available(iOS 11.0, *) {
             configuration.includesCallsInRecents = data.includesCallsInRecents
         }
-        // if !data.iconName.isEmpty {
-        //     if let image = UIImage(named: data.iconName) {
-        //         configuration.iconTemplateImageData = image.pngData()
-        //     } else {
-        //         print("Unable to load icon \(data.iconName).");
-        //     }
-        // }
         if !data.ringtonePath.isEmpty || data.ringtonePath != "system_ringtone_default"  {
             configuration.ringtoneSound = data.ringtonePath
         }

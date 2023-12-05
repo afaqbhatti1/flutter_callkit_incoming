@@ -6,7 +6,6 @@ part 'ios_params.g.dart';
 @JsonSerializable(explicitToJson: true)
 class IOSParams {
   /// App's Icon. using for display inside Callkit(iOS)
-  // final String? iconName;
 
   /// Type handle call `generic`, `number`, `email`
   final String? handleType;
@@ -27,7 +26,6 @@ class IOSParams {
   final String? ringtonePath;
 
   const IOSParams({
-    // this.iconName,
     this.handleType,
     this.supportsVideo,
     this.maximumCallGroups,
