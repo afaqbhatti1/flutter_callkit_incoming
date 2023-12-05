@@ -137,7 +137,7 @@ public class Call: NSObject {
     @objc public var extra: NSDictionary
     
     //iOS
-    @objc public var iconName: String
+    // @objc public var iconName: String
     @objc public var handleType: String
     @objc public var supportsVideo: Bool
     @objc public var maximumCallGroups: Int
